@@ -89,3 +89,45 @@ a {
       color: white;
       text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
       padding-bottom: 10px; }
+
+.sidebar {
+  display: none;
+  width: 300px;
+  background-color: #3F51B5; }
+  .sidebar a.active {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2); }
+  .sidebar h1 {
+    margin: 0;
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    border-bottom: 2px solid #fff59d; }
+  .sidebar a {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 20px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.5); }
+    .sidebar a:hover {
+      background-color: rgba(0, 0, 0, 0.1); }
+    .sidebar a i {
+      color: #fff;
+      text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+      display: inline-block;
+      margin-right: 10px; }
+
+@media (min-width: 800px) {
+  .app-wrap {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row; }
+  .app-header, .app-footer {
+    display: none; }
+  .sidebar {
+    display: block;
+    flex-dre: column; } }

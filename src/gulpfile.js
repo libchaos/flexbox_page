@@ -17,7 +17,7 @@ const browserSync = require('browser-sync');
 //     }))
 //     .pipe(gulp.dest('dist/images'));
 // });
-gulp.task('browser-sync', ()=>{
+gulp.task('browser-sync', ['build', 'sass'], ()=>{
   browserSync({
     server: {
       baseDir: '..'
@@ -41,18 +41,21 @@ gulp.task('sass', () => {
     .pipe(sass())
     .on('error', handleError)
     .pipe(prefix())
-    .pipe(gulp.dest('../styles/'));
+    .pipe(gulp.dest('../styles/'))
+    .pipe(browserSync.reload({stream: true}));
 });
 
-
+gulp.task('rebuild',['build'], ()=>{
+  browserSync.reload();
+});
 // gulp.task('cp', () => {
 //   gulp.src('*.html')
 //     .pipe(gulp.dest('..'));
 // });
 
 gulp.task('watch', () => {
-  gulp.watch(['**/*.html'], ['build']);
+  gulp.watch(['**/*.html'], ['rebuild']);
   gulp.watch(['styles/*.scss'], ['sass'])
 });
 
-gulp.task('default', ['browser-sync'', 'watch']);
+gulp.task('default', ['browser-sync', 'watch']);
