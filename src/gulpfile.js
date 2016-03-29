@@ -17,12 +17,17 @@ const browserSync = require('browser-sync');
 //     }))
 //     .pipe(gulp.dest('dist/images'));
 // });
-gulp.task('browser-sync', ['build', 'sass'], ()=>{
+gulp.task('browser-sync', ['build', 'cp', 'sass'], ()=>{
   browserSync({
     server: {
       baseDir: '..'
     }
   });
+});
+
+gulp.task('cp', function () {
+  return gulp.src(['js/main.js','assets/*'], { base: '.' })
+         .pipe(gulp.dest('..'));
 });
 
 function handleError(err) {
@@ -55,7 +60,8 @@ gulp.task('rebuild',['build'], ()=>{
 
 gulp.task('watch', () => {
   gulp.watch(['**/*.html'], ['rebuild']);
-  gulp.watch(['styles/*.scss'], ['sass'])
+  gulp.watch(['styles/*.scss'], ['sass']);
+  gulp.watch(['js/*.js'], ['cp']);
 });
 
 gulp.task('default', ['browser-sync', 'watch']);
